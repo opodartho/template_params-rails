@@ -1,9 +1,9 @@
 # TemplateParamsRails
+Runtime type-check for template preconditions, including instance variables
+and local variables. Think of this as the method signature of a template.
+There should be at least one of these assertions in almost every template.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/template_params_rails`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
+template_params_rails project integrates [template_params](https://github.com/jaredbeck/template_params) for rails.
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,17 +22,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In template, you may want use template_param like this:
 
-## Development
+```ruby
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+# Assert `poll` is defined. If not, raises an `ArgumentError` (the "arguments"
+# of the template are invalid).
+template_param { poll } 
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+# Assert `@course` is defined. Meaningless because instance variables are
+# always defined.
+template_param { @course } 
 
+# Assert `poll.is_a?(::Poll)`. If not, raises a `TypeError`.
+template_param(::Poll) { poll }
+
+# Assert `@course.is_a?(::Course)`
+template_param(::Course) { @course }
+
+# Assert `@course` is either a `::Course` or `nil`
+template_param(::Course, allow_nil: true) { @course }
+```
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/template_params_rails. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/opodartho/template_params_rails. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
