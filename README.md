@@ -4,6 +4,7 @@ and local variables. Think of this as the method signature of a template.
 There should be at least one of these assertions in almost every template.
 
 template_params-rails project integrates [template_params](https://github.com/jaredbeck/template_params) for rails.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -45,7 +46,8 @@ template_param(::Course, allow_nil: true) { @course }
 ```
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/opodartho/template_params-rails. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/opodartho/template_params-rails. 
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
